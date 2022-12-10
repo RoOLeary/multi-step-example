@@ -77,13 +77,8 @@
             
             // trigger actual submission here
             // uncomment to see validation in action
-            form.submit(); 
+            // form.submit(); 
             
-            // just some stuff to mimic a request being fired
-            // setTimeout(function() { 
-            //     $(form).hide();
-            //     $('#success').show();
-            // }, 2000);
             
         }
 
