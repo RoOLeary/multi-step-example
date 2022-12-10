@@ -60,7 +60,7 @@
                     
                     form.submit();
                     
-                    // this is just a dummy function to mock the submission
+                    // this is just som dummy crap to mock the submission
                     // setTimeout(function() { 
                     //     $(form).hide();
                     //     $('#success').show();
