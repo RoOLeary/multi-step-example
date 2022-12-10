@@ -43,30 +43,17 @@
         });
 
         form.find('.submit').on('click', function(e){
-            
             // this is kind of what I meant with the preventing default
             e.preventDefault(); 
-            
             if(typeof args.beforeSubmit !== 'undefined' && typeof args.beforeSubmit !== 'function')
-                
                 args.beforeSubmit(form, this);
                 //  check if args submit is set false.
                 //  submit wom't execute if its not  
-                if(typeof args.submit === 'undefined' || (typeof args.submit === 'boolean' && args.submit)){
+                if(typeof args.submit === 'undefined' || (typeof args.submit === 'boolean' && args.submit)){ 
                     
-                    // log out the serialized string
-                    // will trigger the validations, but otherwise 
                     let formData = form.serialize();
-
                     // submit or send to another function to carry on with data transit
-                        dispatch(formData);
-
-                    // this is just som dummy crap to mock the submission
-                    // setTimeout(function() { 
-                    //     $(form).hide();
-                    //     $('#success').show();
-                    // }, 2000);
-        
+                    dispatch(formData);
                 }
             return form;
         });
@@ -77,7 +64,7 @@
             
             // trigger actual submission here
             // uncomment to see validation in action
-            // form.submit(); 
+            form.submit(); 
             
             
         }
