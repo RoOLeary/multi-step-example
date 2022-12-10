@@ -8,37 +8,38 @@
         
         form.navigateTo = function (i) {/*index*/
             
-            // Adds class 'current' to the the current step
+            // Adds class 'active' to the the active step
+            steps.removeClass('active').eq(i).addClass('active');
             
-            steps.removeClass('current').eq(i).addClass('current');
-            
-            // Show only the navigation buttons that make sense for the current section
+            // Show only the navigation buttons that make sense for the active section
             // i.e. if it needs "Next" or "Submit", based on the length.
-            
+            // set up a check to see where we are
+
             let lastStep = i >= steps.length - 1;
             form.find('.next').toggle(!lastStep);
             form.find('.submit').toggle(lastStep);
             
             return form;
         }
-        function currentIndex() {
-            //  Return the current index by looking at which section has the class 'current'
-            return steps.index(steps.filter('.current'));
+
+        function activeIndex() {
+            //  Return the active index by looking at which section has the class 'active'
+            return steps.index(steps.filter('.active'));
         }
       
-        //  Next button goes forward if current block validates
+        //  Next button goes forward if active block validates
         form.find('.next').click(function() {
             if('validations' in args && typeof args.validations === 'object' && !$.isArray(args.validations)){
             if(!('noValidate' in args) || (typeof args.noValidate === 'boolean' && !args.noValidate)){
                 form.validate(args.validations);
                 if(form.valid() == true){
-                    form.navigateTo(currentIndex() + 1);
+                    form.navigateTo(activeIndex() + 1);
                 return true;
                 }
                 return false;
                 }
             }
-            form.navigateTo(currentIndex() + 1);
+            form.navigateTo(activeIndex() + 1);
         });
 
         form.find('.submit').on('click', function(e){
@@ -49,17 +50,17 @@
             if(typeof args.beforeSubmit !== 'undefined' && typeof args.beforeSubmit !== 'function')
                 
                 args.beforeSubmit(form, this);
-                //  check if args.submit is set false.
+                //  check if args submit is set false.
                 //  submit wom't execute if its not  
                 if(typeof args.submit === 'undefined' || (typeof args.submit === 'boolean' && args.submit)){
                     
                     // log out the serialized string
-                    console.log(form.serialize());
                     // will trigger the validations, but otherwise 
-                    // breaks (as expected), as not connected to anything
-                    
-                    form.submit();
-                    
+                    let formData = form.serialize();
+
+                    // submit or send to another function to carry on with data transit
+                        dispatch(formData);
+
                     // this is just som dummy crap to mock the submission
                     // setTimeout(function() { 
                     //     $(form).hide();
@@ -69,6 +70,22 @@
                 }
             return form;
         });
+
+        function dispatch(data){
+            
+            console.log('serialized form data: ', data);
+            
+            // trigger actual submission here
+            // uncomment to see validation in action
+            form.submit(); 
+            
+            // just some stuff to mimic a request being fired
+            // setTimeout(function() { 
+            //     $(form).hide();
+            //     $('#success').show();
+            // }, 2000);
+            
+        }
 
         // By default, navigate to the first slide if it is being set using defaultStep property
 
