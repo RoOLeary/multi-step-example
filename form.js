@@ -13,7 +13,7 @@
             
             // Show only the navigation buttons that make sense for the active section
             // i.e. if it needs "Next" or "Submit", based on the length.
-            // set up a check to see where we are
+            // set up a check to what step we're on
 
             let lastStep = i >= steps.length - 1;
             form.find('.next').toggle(!lastStep);
@@ -65,7 +65,6 @@
             // trigger actual submission here
             // uncomment to see validation in action
             form.submit(); 
-            
             
         }
 
