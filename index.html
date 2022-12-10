@@ -8,8 +8,8 @@
 	<script type="text/javascript" src="./form.js"></script>
 	<script type="text/javascript">
 
-		// really just illustrative. 
-		// add/delete as appropriate, you can add custom validation methods here
+		// add/delete as appropriate, 
+		// you can add custom validation methods here
 	
 		jQuery(document).ready(function(){
 			$.validator.addMethod('day', function(value, element, param) {
@@ -24,7 +24,6 @@
 			
 			var val	=	{
 			    // Specify validation rules
-
 			    rules: {
 					first_name: "required",
 					last_name: "required",
@@ -41,6 +40,18 @@
 					
 					availability: {
 						required:true,
+					},
+
+					day: {
+						required:true,
+						minlength:2,
+						digits:true
+					},
+					month: {
+						required:true,
+						minlength: 2,
+						maxlength: 2,
+						digits:true
 					},
 				},
 			    // Specify validation error messages
@@ -63,10 +74,10 @@
 					},
 					
 					day:{
-						required: 	"day is required",
-						minlength: 	"Date should be a 2 digit number, e.i., 01 or 20",
-						maxlength: 	"Date should be a 2 digit number, e.i., 01 or 20",
-						digits: 	"Date should be a number"
+						required: 	"Day is required",
+						minlength: 	"Day should be a 2 digit number, e.i., 01 or 20",
+						maxlength: 	"Day should be a 2 digit number, e.i., 01 or 20",
+						digits: 	"Day should be a number"
 					},
 					month:{
 						required: 	"Month is required",

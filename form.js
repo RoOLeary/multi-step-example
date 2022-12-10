@@ -69,7 +69,6 @@
         }
 
         // By default, navigate to the first slide if it is being set using defaultStep property
-
         typeof args.defaultStep === 'number' ? form.navigateTo(args.defaultStep) : null;
             form.noValidate = function() {
             }
