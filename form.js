@@ -53,11 +53,18 @@
                 //  submit wom't execute if its not  
                 if(typeof args.submit === 'undefined' || (typeof args.submit === 'boolean' && args.submit)){
                     
+                    // log out the serialized string
                     console.log(form.serialize());
-                    setTimeout(function() { 
-                        $(form).hide();
-                        $('#success').show();
-                    }, 2000);
+                    // will trigger the validations, but otherwise 
+                    // breaks (as expected), as not connected to anything
+                    
+                    form.submit();
+                    
+                    // this is just a dummy function to mock the submission
+                    // setTimeout(function() { 
+                    //     $(form).hide();
+                    //     $('#success').show();
+                    // }, 2000);
         
                 }
             return form;
