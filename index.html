@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Multi Step Alternative (with jQuery validate) </title>
+	<link rel="stylesheet" type="text/css" href="./style.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+	
+	<script type="text/javascript" src="./form.js"></script>
+	<script type="text/javascript">
+
+		// really just illustrative. add/delete as appropriate
+	
+		$(document).ready(function(){
+			$.validator.addMethod('date', function(value, element, param) {
+				return (value != 0) && (value <= 31) && (value == parseInt(value, 10));
+			}, 'Please enter a valid date!');
+			$.validator.addMethod('month', function(value, element, param) {
+				return (value != 0) && (value <= 12) && (value == parseInt(value, 10));
+			}, 'Please enter a valid month!');
+			$.validator.addMethod('year', function(value, element, param) {
+				return (value != 0) && (value >= 1900) && (value == parseInt(value, 10));
+			}, 'Please enter a valid year not less than 1900!');
+			$.validator.addMethod('username', function(value, element, param) {
+				var nameRegex = /^[a-zA-Z0-9]+$/;
+				return value.match(nameRegex);
+			}, 'Only a-z, A-Z, 0-9 characters are allowed');
+
+			var val	=	{
+			    // Specify validation rules
+			    rules: {
+			      fname: "required",
+			      email: {
+					        required: true,
+					        email: true
+					      },
+					phone: {
+						required:true,
+						minlength:10,
+						maxlength:10,
+						digits:true
+					},
+					date:{
+						date:true,
+						required:true,
+						minlength:2,
+						maxlength:2,
+						digits:true
+					},
+					month:{
+						month:true,
+						required:true,
+						minlength:2,
+						maxlength:2,
+						digits:true
+					},
+					year:{
+						year:true,
+						required:true,
+						minlength:4,
+						maxlength:4,
+						digits:true
+					},
+					username:{
+						username:true,
+						required:true,
+						minlength:4,
+						maxlength:16,
+					},
+					password:{
+						required:true,
+						minlength:8,
+						maxlength:16,
+					}
+			    },
+			    // Specify validation error messages
+			    messages: {
+					fname: 		"First name is required",
+					email: {
+						required: 	"Email is required",
+						email: 		"Please enter a valid e-mail",
+					},
+					phone:{
+						required: 	"Phone number is requied",
+						minlength: 	"Please enter 10 digit mobile number",
+						maxlength: 	"Please enter 10 digit mobile number",
+						digits: 	"Only numbers are allowed in this field"
+					},
+					date:{
+						required: 	"Date is required",
+						minlength: 	"Date should be a 2 digit number, e.i., 01 or 20",
+						maxlength: 	"Date should be a 2 digit number, e.i., 01 or 20",
+						digits: 	"Date should be a number"
+					},
+					month:{
+						required: 	"Month is required",
+						minlength: 	"Month should be a 2 digit number, e.i., 01 or 12",
+						maxlength: 	"Month should be a 2 digit number, e.i., 01 or 12",
+						digits: 	"Only numbers are allowed in this field"
+					},
+					year:{
+						required: 	"Year is required",
+						minlength: 	"Year should be a 4 digit number, e.i., 2018 or 1990",
+						maxlength: 	"Year should be a 4 digit number, e.i., 2018 or 1990",
+						digits: 	"Only numbers are allowed in this field"
+					}
+			    }
+			}
+			$("#application-form").multiStepForm(
+			{
+				// defaultStep:0,
+				beforeSubmit : function(form, submit){
+					console.log("called before submiting the form");
+					console.log(form);
+					console.log(submit);
+				},
+				validations:val,
+			}
+			).navigateTo(0);
+		});
+	</script>
+</head>
+<body style="background-color: #f9f9f9;">
+	<form id="application-form" action="#" method="POST">
+		<h1>Application Form</h1>
+		
+		<!-- One "slide" for each step in the form: -->
+		<div class="step">
+			<p><input placeholder="Voornaam" name="first-name"></p>
+			<p><input placeholder="Achternaam" name="last-name"></p>
+		</div>
+		<div class="step">More Info:
+			<p><input placeholder="E-mail" name="email-address"></p>
+			<p><input placeholder="Telefonenummer" name="phone-number"></p>
+		</div>
+		<div class="step">Availabilty:
+			<br />
+			<select name="availability">
+				<option>Selectie de dag</option>
+				<option>Montag</option>
+				<option>Dinsdag</option>
+				<option>Woensdag</option>
+				<option>Donderdag</option>
+				<option>Vrijdag</option>
+				<option>Zaterdag</option>
+				<option>zondag</option>
+			</select>
+			<p><input placeholder="dd" name="date" required></p>
+			<p><input placeholder="mm" name="month" required></p>
+		</div>
+
+		<div style="overflow:auto;">
+			<div style="margin-top: 5px;">
+				<button type="button" class="next">Next</button>
+				<button type="button" class="submit">Submit</button>
+			</div>
+		</div>
+
+	</form>
+</body>
+</html>
