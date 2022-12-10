@@ -5,13 +5,12 @@
 	<link rel="stylesheet" type="text/css" href="./style.css">
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
-	
 	<script type="text/javascript" src="./form.js"></script>
 	<script type="text/javascript">
 
 		// really just illustrative. add/delete as appropriate
 	
-		$(document).ready(function(){
+		jQuery(document).ready(function(){
 			$.validator.addMethod('date', function(value, element, param) {
 				return (value != 0) && (value <= 31) && (value == parseInt(value, 10));
 			}, 'Please enter a valid date!');
@@ -21,7 +20,7 @@
 			$.validator.addMethod('year', function(value, element, param) {
 				return (value != 0) && (value >= 1900) && (value == parseInt(value, 10));
 			}, 'Please enter a valid year not less than 1900!');
-			$.validator.addMethod('username', function(value, element, param) {
+			$.validator.addMethod('first_name', function(value, element, param) {
 				var nameRegex = /^[a-zA-Z0-9]+$/;
 				return value.match(nameRegex);
 			}, 'Only a-z, A-Z, 0-9 characters are allowed');
@@ -41,20 +40,7 @@
 					maxlength:10,
 					digits:true
 				},
-				day:{
-					date:true,
-					required:true,
-					minlength:2,
-					maxlength:2,
-					digits:true
-				},
-				month:{
-					month:true,
-					required:true,
-					minlength:2,
-					maxlength:2,
-					digits:true
-				},
+				
 				availability: {
 					required:true,
 				}
@@ -73,8 +59,13 @@
 						maxlength: 	"Please enter 10 digit mobile number",
 						digits: 	"Only numbers are allowed in this field"
 					},
+					
+					availability:{
+						required: 	"Please indicate your availability",
+					},
+					
 					day:{
-						required: 	"Date is required",
+						required: 	"day is required",
 						minlength: 	"Date should be a 2 digit number, e.i., 01 or 20",
 						maxlength: 	"Date should be a 2 digit number, e.i., 01 or 20",
 						digits: 	"Date should be a number"
@@ -84,15 +75,11 @@
 						minlength: 	"Month should be a 2 digit number, e.i., 01 or 12",
 						maxlength: 	"Month should be a 2 digit number, e.i., 01 or 12",
 						digits: 	"Only numbers are allowed in this field"
-					},
-					availability:{
-						required: 	"Please indicate your availability",
-					},
+					}
 			    }
 			}
 			$("#application-form").multiStepForm(
 			{
-				// defaultStep:0,
 				beforeSubmit : function(form, submit){
 					console.log("called before submiting the form");
 					console.log(form);
@@ -108,27 +95,29 @@
 	<form id="application-form" action="#" method="POST">
 		<h1>Application Form</h1>
 		
-		<!-- One "slide" for each step in the form: -->
+		<!-- One "step" for each step in the form: -->
+		
 		<div class="step">
 			<p><input placeholder="Voornaam" name="first_name"></p>
 			<p><input placeholder="Achternaam" name="last_name"></p>
 		</div>
+
 		<div class="step">More Info:
 			<p><input placeholder="E-mail" name="email_address"></p>
 			<p><input placeholder="Telefonenummer" name="phone_number"></p>
 		</div>
+		
 		<div class="step">
-			<h3>Jouw Availabilty:</h3>
+			<h3>SELECTIE JOUW DAGEN:</h3>
 			<br />
-			<select name='availability'  size='1'>
-				<option value=''>Selectie de dag
+			<select name='availability' multiple required>
 				<option>Montag</option>
 				<option>Dinsdag</option>
 				<option>Woensdag</option>
 				<option>Donderdag</option>
 				<option>Vrijdag</option>
 				<option>Zaterdag</option>
-				<option>zondag</option>
+				<option>Zondag</option>
 			</select>
 			<p><input placeholder="dd" name="date" required></p>
 			<p><input placeholder="mm" name="month" required></p>
@@ -141,6 +130,11 @@
 			</div>
 		</div>
 
+		
 	</form>
+	<div id="success" style="display: none;">
+		<h1>Success!!</h1>
+		<h3>You've successfully submitted your availability</h3>
+	</div>
 </body>
 </html>
