@@ -2,8 +2,10 @@
 
 A simple, but better example of what I meant on Thursday morning. 
 
-The workflow is already mostly correct, however, I'd consider splitting this out, dividing the form into its steps, and validating on "Next" click. When the form submit method is triggered, it will only do so once all validations pass. 
+Your workflow is already mostly correct, however, I'd consider splitting this out, dividing the form into its steps, and validating on "Next" click. When the form submit method is triggered, it will only do so once all validations pass on required fields, and not before. 
 
-And only when we've gotten to the last step, does the actual "Submit" form render. I've added an example of using jQuery validation plugin. Full disclosure: Haven't used jQuery in a LONG time, so this could be a bit rusty.
+So basically, you're able to collect and append the data on each step, which is just a click, not a submit. Only when we've gotten to the last step, does the actual "Submit" button render. 
 
-Logging out the serialized form data. But on submission, you can more or less take it from there. 
+I've added an example of using jQuery validation plugin and setting some custom validation rules. 
+
+Full disclosure: Haven't used jQuery in a LONG time, so this could be a bit rusty. Lastly, am logging out the serialized form data on "submit. But on actual submission, you can send that formdata onward. 

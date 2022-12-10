@@ -8,7 +8,8 @@
 	<script type="text/javascript" src="./form.js"></script>
 	<script type="text/javascript">
 
-		// really just illustrative. add/delete as appropriate
+		// really just illustrative. 
+		// add/delete as appropriate, you can add custom validation methods here
 	
 		jQuery(document).ready(function(){
 			$.validator.addMethod('day', function(value, element, param) {
@@ -20,31 +21,28 @@
 			$.validator.addMethod('year', function(value, element, param) {
 				return (value != 0) && (value >= 1900) && (value == parseInt(value, 10));
 			}, 'Please enter a valid year not less than 1900!');
-			$.validator.addMethod('first_name', function(value, element, param) {
-				var nameRegex = /^[a-zA-Z0-9]+$/;
-				return value.match(nameRegex);
-			}, 'Only a-z, A-Z, 0-9 characters are allowed');
-
+			
 			var val	=	{
 			    // Specify validation rules
+
 			    rules: {
-				first_name: "required",
-				last_name: "required",
-				email_address: {
-					required: true,
-					email: true
+					first_name: "required",
+					last_name: "required",
+					email_address: {
+						required: true,
+						email: true
+					},
+					phone_number: {
+						required:true,
+						minlength:10,
+						maxlength:10,
+						digits:true
+					},
+					
+					availability: {
+						required:true,
+					},
 				},
-				phone_number: {
-					required:true,
-					minlength:10,
-					maxlength:10,
-					digits:true
-				},
-				
-				availability: {
-					required:true,
-				},
-			},
 			    // Specify validation error messages
 			    messages: {
 					first_name: 	"First name is required",
@@ -78,6 +76,9 @@
 					}
 			    }
 			}
+			
+			// will kickin when form submitted
+
 			$("#application-form").multiStepForm(
 			{
 				beforeSubmit : function(form, submit){
@@ -89,11 +90,12 @@
 			}
 			).navigateTo(0);
 		});
+
 	</script>
 </head>
 <body style="background-color: #f9f9f9;">
 	<form id="application-form" action="#" method="POST">
-		<h1>Application Form</h1>
+		<h1>Picnic application form</h1>
 		
 		<!-- One "step" for each step in the form: -->
 		
