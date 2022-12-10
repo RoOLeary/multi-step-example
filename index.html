@@ -11,20 +11,6 @@
 		// really just illustrative. add/delete as appropriate
 	
 		jQuery(document).ready(function(){
-			$.validator.addMethod('date', function(value, element, param) {
-				return (value != 0) && (value <= 31) && (value == parseInt(value, 10));
-			}, 'Please enter a valid date!');
-			$.validator.addMethod('month', function(value, element, param) {
-				return (value != 0) && (value <= 12) && (value == parseInt(value, 10));
-			}, 'Please enter a valid month!');
-			$.validator.addMethod('year', function(value, element, param) {
-				return (value != 0) && (value >= 1900) && (value == parseInt(value, 10));
-			}, 'Please enter a valid year not less than 1900!');
-			$.validator.addMethod('first_name', function(value, element, param) {
-				var nameRegex = /^[a-zA-Z0-9]+$/;
-				return value.match(nameRegex);
-			}, 'Only a-z, A-Z, 0-9 characters are allowed');
-
 			var val	=	{
 			    // Specify validation rules
 			    rules: {
@@ -40,7 +26,6 @@
 					maxlength:10,
 					digits:true
 				},
-				
 				availability: {
 					required:true,
 				}
@@ -78,6 +63,7 @@
 					}
 			    }
 			}
+
 			$("#application-form").multiStepForm(
 			{
 				beforeSubmit : function(form, submit){
@@ -93,6 +79,7 @@
 </head>
 <body style="background-color: #f9f9f9;">
 	<form id="application-form" action="#" method="POST">
+		
 		<h1>Application Form</h1>
 		
 		<!-- One "step" for each step in the form: -->
@@ -129,8 +116,6 @@
 				<button type="button" class="submit">Submit</button>
 			</div>
 		</div>
-
-		
 	</form>
 	<div id="success" style="display: none;">
 		<h1>Success!!</h1>
