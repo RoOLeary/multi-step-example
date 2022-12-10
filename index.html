@@ -29,64 +29,51 @@
 			var val	=	{
 			    // Specify validation rules
 			    rules: {
-			      fname: "required",
-			      email: {
-					        required: true,
-					        email: true
-					      },
-					phone: {
-						required:true,
-						minlength:10,
-						maxlength:10,
-						digits:true
-					},
-					date:{
-						date:true,
-						required:true,
-						minlength:2,
-						maxlength:2,
-						digits:true
-					},
-					month:{
-						month:true,
-						required:true,
-						minlength:2,
-						maxlength:2,
-						digits:true
-					},
-					year:{
-						year:true,
-						required:true,
-						minlength:4,
-						maxlength:4,
-						digits:true
-					},
-					username:{
-						username:true,
-						required:true,
-						minlength:4,
-						maxlength:16,
-					},
-					password:{
-						required:true,
-						minlength:8,
-						maxlength:16,
-					}
-			    },
+				first_name: "required",
+				last_name: "required",
+				email_address: {
+					required: true,
+					email: true
+				},
+				phone_number: {
+					required:true,
+					minlength:10,
+					maxlength:10,
+					digits:true
+				},
+				day:{
+					date:true,
+					required:true,
+					minlength:2,
+					maxlength:2,
+					digits:true
+				},
+				month:{
+					month:true,
+					required:true,
+					minlength:2,
+					maxlength:2,
+					digits:true
+				},
+				availability: {
+					required:true,
+				}
+			},
 			    // Specify validation error messages
 			    messages: {
-					fname: 		"First name is required",
-					email: {
+					first_name: 	"First name is required",
+					last_name: 		"Last name is required",
+					email_address: {
 						required: 	"Email is required",
 						email: 		"Please enter a valid e-mail",
 					},
-					phone:{
+					phone_number:{
 						required: 	"Phone number is requied",
 						minlength: 	"Please enter 10 digit mobile number",
 						maxlength: 	"Please enter 10 digit mobile number",
 						digits: 	"Only numbers are allowed in this field"
 					},
-					date:{
+					day:{
 						required: 	"Date is required",
 						minlength: 	"Date should be a 2 digit number, e.i., 01 or 20",
 						maxlength: 	"Date should be a 2 digit number, e.i., 01 or 20",
@@ -98,12 +85,9 @@
 						maxlength: 	"Month should be a 2 digit number, e.i., 01 or 12",
 						digits: 	"Only numbers are allowed in this field"
 					},
-					year:{
-						required: 	"Year is required",
-						minlength: 	"Year should be a 4 digit number, e.i., 2018 or 1990",
-						maxlength: 	"Year should be a 4 digit number, e.i., 2018 or 1990",
-						digits: 	"Only numbers are allowed in this field"
-					}
+					availability:{
+						required: 	"Please indicate your availability",
+					},
 			    }
 			}
 			$("#application-form").multiStepForm(
@@ -126,17 +110,18 @@
 		
 		<!-- One "slide" for each step in the form: -->
 		<div class="step">
-			<p><input placeholder="Voornaam" name="first-name"></p>
-			<p><input placeholder="Achternaam" name="last-name"></p>
+			<p><input placeholder="Voornaam" name="first_name"></p>
+			<p><input placeholder="Achternaam" name="last_name"></p>
 		</div>
 		<div class="step">More Info:
-			<p><input placeholder="E-mail" name="email-address"></p>
-			<p><input placeholder="Telefonenummer" name="phone-number"></p>
+			<p><input placeholder="E-mail" name="email_address"></p>
+			<p><input placeholder="Telefonenummer" name="phone_number"></p>
 		</div>
-		<div class="step">Availabilty:
+		<div class="step">
+			<h3>Jouw Availabilty:</h3>
 			<br />
-			<select name="availability">
-				<option>Selectie de dag</option>
+			<select name='availability'  size='1'>
+				<option value=''>Selectie de dag
 				<option>Montag</option>
 				<option>Dinsdag</option>
 				<option>Woensdag</option>
