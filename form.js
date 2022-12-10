@@ -14,7 +14,7 @@
             // Show only the navigation buttons that make sense for the active section
             // i.e. if it needs "Next" or "Submit", based on the length.
             // set up a check to what step we're on
-
+            
             let lastStep = i >= steps.length - 1;
             form.find('.next').toggle(!lastStep);
             form.find('.submit').toggle(lastStep);
@@ -50,8 +50,8 @@
                 //  check if args submit is set false.
                 //  submit wom't execute if its not  
                 if(typeof args.submit === 'undefined' || (typeof args.submit === 'boolean' && args.submit)){ 
-                    
-                    let formData = form.serialize();
+
+                    let formData = form.serializeArray();
                     // submit or send to another function to carry on with data transit
                     dispatch(formData);
                 }
@@ -61,7 +61,6 @@
         function dispatch(data){
             
             console.log('serialized form data: ', data);
-            
             // trigger actual submission here
             // uncomment to see validation in action
             form.submit(); 

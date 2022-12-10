@@ -18,10 +18,7 @@
 			$.validator.addMethod('month', function(value, element, param) {
 				return (value != 0) && (value <= 12) && (value == parseInt(value, 10));
 			}, 'Please enter a valid month!');
-			$.validator.addMethod('availability', function(value, element, param) {
-				return (value != 0) && (value <= 12) && (value == parseInt(value, 10));
-			}, 'Please enter your availability!');
-			
+
 			var val	=	{
 			    // Specify validation rules
 			    rules: {
@@ -38,7 +35,7 @@
 						digits:true
 					},
 					
-					availability: {
+					'availability[]': {
 						required:true,
 					},
 
@@ -69,7 +66,7 @@
 						digits: 	"Only numbers are allowed in this field"
 					},
 					
-					availability:{
+					'availability[]':{
 						required: 	"Please indicate your availability",
 					},
 					
@@ -88,18 +85,16 @@
 			    }
 			}
 			
-			// will kickin when form submitted
+			// will kick in when form submitted
 
-			$("#application-form").multiStepForm(
-			{
+			$("#application-form").multiStepForm({
 				beforeSubmit : function(form, submit){
 					console.log("called before submiting the form");
 					console.log(form);
 					console.log(submit);
 				},
 				validations:val,
-			}
-			).navigateTo(0);
+			}).navigateTo(0);
 		});
 
 	</script>
@@ -123,14 +118,14 @@
 		<div class="step">
 			<h3>SELECTIE JOUW DAGEN:</h3>
 			<br />
-			<select name='availability[]' multiple required>
-				<option>Montag</option>
-				<option>Dinsdag</option>
-				<option>Woensdag</option>
-				<option>Donderdag</option>
-				<option>Vrijdag</option>
-				<option>Zaterdag</option>
-				<option>Zondag</option>
+			<select name="availability[]" id="availability" multiple required>
+				<option value="montag">Montag</option>
+				<option value="dinsdag">Dinsdag</option>
+				<option value="woensdag">Woensdag</option>
+				<option value="donderdag">Donderdag</option>
+				<option value="vrijdag">Vrijdag</option>
+				<option value="zaterdag">Zaterdag</option>
+				<option value="zontag">Zondag</option>
 			</select>
 			<p><input placeholder="dd" name="day" required></p>
 			<p><input placeholder="mm" name="month" required></p>
