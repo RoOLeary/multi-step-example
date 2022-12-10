@@ -21,6 +21,8 @@ body {
     min-width: 300px; 
 }
 
+
+
 h1 {text-align: center; }
 
 input, select {
@@ -29,6 +31,14 @@ input, select {
     font-size: 17px; 
     border: 1px solid #aaaaaa;
 }
+
+.controls{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-top: 5px;
+}
+
 
 button {
     background-color: rgba(255,23,30); 
@@ -43,6 +53,7 @@ button {
 button:hover {
     opacity: 0.8;
 }
+
 .error {
     color: #f00; 
 }

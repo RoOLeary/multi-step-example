@@ -6,7 +6,7 @@
         var form = this;
         var steps = form.find('.step');
         
-        form.navigateTo = function (i) {/*index*/
+        form.stepTo = function (i) {
             
             // Adds class 'active' to the the active step
             steps.removeClass('active').eq(i).addClass('active');
@@ -33,13 +33,13 @@
             if(!('noValidate' in args) || (typeof args.noValidate === 'boolean' && !args.noValidate)){
                 form.validate(args.validations);
                 if(form.valid() == true){
-                    form.navigateTo(activeIndex() + 1);
-                return true;
+                    form.stepTo(activeIndex() + 1);
+                    return true;
                 }
-                return false;
+                    return false;
                 }
             }
-            form.navigateTo(activeIndex() + 1);
+            form.stepTo(activeIndex() + 1);
         });
 
         form.find('.submit').on('click', function(e){
@@ -68,7 +68,7 @@
         }
 
         // By default, navigate to the first slide if it is being set using defaultStep property
-        typeof args.defaultStep === 'number' ? form.navigateTo(args.defaultStep) : null;
+        typeof args.defaultStep === 'number' ? form.stepTo(args.defaultStep) : null;
             form.noValidate = function() {
             }
         return form;

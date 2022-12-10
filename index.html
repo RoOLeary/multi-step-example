@@ -12,6 +12,7 @@
 		// you can add custom validation methods here
 	
 		jQuery(document).ready(function(){
+			
 			$.validator.addMethod('day', function(value, element, param) {
 				return (value != 0) && (value <= 31) && (value == parseInt(value, 10));
 			}, 'Please enter a valid day!');
@@ -35,7 +36,7 @@
 						digits:true
 					},
 					
-					'availability[]': {
+					availability: {
 						required:true,
 					},
 
@@ -66,7 +67,7 @@
 						digits: 	"Only numbers are allowed in this field"
 					},
 					
-					'availability[]':{
+					availability:{
 						required: 	"Please indicate your availability",
 					},
 					
@@ -94,7 +95,7 @@
 					console.log(submit);
 				},
 				validations:val,
-			}).navigateTo(0);
+			}).stepTo(0);
 		});
 
 	</script>
@@ -118,7 +119,7 @@
 		<div class="step">
 			<h3>SELECTIE JOUW DAGEN:</h3>
 			<br />
-			<select name="availability[]" id="availability" multiple required>
+			<select name="availability" id="availability" multiple required>
 				<option value="montag">Montag</option>
 				<option value="dinsdag">Dinsdag</option>
 				<option value="woensdag">Woensdag</option>
@@ -131,11 +132,9 @@
 			<p><input placeholder="mm" name="month" required></p>
 		</div>
 
-		<div style="overflow:auto;">
-			<div style="margin-top: 5px;">
-				<button type="button" class="next">Next</button>
-				<button type="button" class="submit">Submit</button>
-			</div>
+		<div class="controls">
+			<button type="button" class="next">Next</button>
+			<button type="submit" class="submit">Submit</button>
 		</div>
 
 		
